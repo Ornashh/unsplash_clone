@@ -1,6 +1,13 @@
+.images_grid {
+  padding: 24px 0;
+}
+
 .image {
-  cursor: pointer;
+  display: block;
   position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
   overflow: hidden;
 
   &:hover {
@@ -59,29 +66,21 @@
   transform: translateY(30px);
   transition: all 0.3s ease;
 
-  span {
-    display: flex;
-    align-items: center;
-    width: 32px;
-    height: 32px;
-    margin-right: 8px;
-
-    img {
-      border-radius: 50%;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-
   h3 {
     color: #fff;
     font-weight: 500;
   }
 }
 
-.test321 {
+.user_image_wrapper {
+  display: flex;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+
   img {
+    border-radius: 50%;
     width: 100%;
     height: 100%;
     object-fit: cover;

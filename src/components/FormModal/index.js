@@ -1,11 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setClearRecent } from "../../store/actions";
+import { setClearRecent, setSearchModal } from "../../store/actions";
 import { useHistory } from "react-router-dom";
 
 import s from "./searchModal.module.scss";
 
-const SearchModal = () => {
+const FormModal = () => {
   const dispatch = useDispatch();
   const { recentArr, isSearchModal } = useSelector((state) => state.appState);
   const history = useHistory();
@@ -18,6 +18,13 @@ const SearchModal = () => {
   const handleClearRecent = () => {
     localStorage.removeItem("search");
     dispatch(setClearRecent());
+  };
+
+  const handleClick = (value) => {
+    history.push({
+      pathname: `/photos/${value}`,
+    });
+    dispatch(setSearchModal(false));
   };
 
   return (
@@ -38,7 +45,7 @@ const SearchModal = () => {
                 key={i}
                 className={s.recent_item}
                 onClick={() => {
-                  history.push(`/photos/${el}`);
+                  handleClick(el);
                 }}
               >
                 {el}
@@ -51,4 +58,4 @@ const SearchModal = () => {
   );
 };
 
-export default SearchModal;
+export default FormModal;

@@ -1,14 +1,18 @@
 import React, { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
-import { setAddRecent, setSearchModal } from "../../store/actions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setAddRecent,
+  setSearchModal,
+  setSearchValue,
+} from "../../store/actions";
 import { useHistory } from "react-router-dom";
 
 import s from "./search.module.scss";
 import { AiOutlineSearch } from "react-icons/ai";
-import SearchModal from "../SearchModal";
-import { useClickAway } from "../../utils/useClickAway";
+import SearchModal from "../FormModal";
+import { useClickAway } from "../../hooks/useClickAway";
 
-const Search = () => {
+const Form = ({ changeStyles }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const input = useRef(null);
@@ -26,6 +30,7 @@ const Search = () => {
     if (value) {
       dispatch(setAddRecent(value));
       history.push(`/photos/${value}`);
+      dispatch(setSearchModal(false));
     }
   };
 
@@ -34,8 +39,16 @@ const Search = () => {
   };
 
   return (
-    <form className={s.search_wrapper} onSubmit={handleSubmit} ref={input}>
-      <div className={s.search}>
+    <form
+      className={`${s.search_wrapper} ${
+        changeStyles ? s.changeStyles_search_wrapper : ""
+      }`}
+      onSubmit={handleSubmit}
+      ref={input}
+    >
+      <div
+        className={`${s.search} ${changeStyles ? s.changeStyles_search : ""}`}
+      >
         <span>
           <AiOutlineSearch />
         </span>
@@ -51,4 +64,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default Form;
